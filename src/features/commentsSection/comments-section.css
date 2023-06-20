@@ -1,0 +1,296 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+button, input[type="submit"], input[type="reset"] {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+
+#comments-section{
+    max-width: 1440px;
+    width: 100%;
+    font-family: Rubik;
+}
+
+#comments-section .wrapper{
+    margin: 0 auto;
+    max-width: 732px;
+    padding:64px 0px;
+}
+
+.thread{
+    
+}
+
+.comment{
+    width: 100%;
+    margin-bottom: 28px;
+}
+
+.container{
+    background-color: white;
+    border-radius: 10px;
+}
+
+.score{
+    width: 90px;
+    min-height: 140px;
+    padding-top: 24px;
+}
+
+.controller{
+    background-color: #F5F6FA;
+    max-width: 40px;
+    margin: 0 auto;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.increase,
+.decrease{
+    width: 40px;
+    height: 40px;
+    border-radius: inherit;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.increase{
+    background-image: url(./images/icon-plus.svg);
+}
+
+.decrease{
+    background-image: url(./images/icon-minus.svg);
+}
+
+.main-section{
+    max-width: calc(100% - 90px);
+    position:relative;
+    width: 100%;
+}
+
+.align{
+    display: inline-block;
+    vertical-align: top;
+}
+
+.center{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.header{
+    text-align: left;
+    padding-top: 25px;
+    margin-bottom: 18px;
+}
+
+.actions{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    text-align: right;
+    font-size: 16px;
+    font-weight: 500;
+    padding-top: 32px;
+}
+
+.actions > button{
+    margin-right: 26px;
+    position: relative;
+}
+
+.actions > button:before{
+    content: "";
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-size: 14px;
+    position: absolute;
+    left: -21px;
+    top: 2px;
+    background-repeat: no-repeat;
+}
+
+.reply{
+
+}
+
+.reply:before{
+    background-image: url(./images/icon-reply.svg);
+}
+
+.edit{
+
+}
+
+.edit:before{
+    background-image: url(./images/icon-edit.svg);
+}
+
+.delete{
+
+}
+
+.delete:before{
+    background-image: url(./images/icon-delete.svg);
+}
+
+.message{
+    font-size: 16px;
+    text-align: left;
+    padding-right: 40px;
+    margin-top: -7px;
+    line-height: 24px;
+    color: hsl(211, 10%, 45%);
+    font-weight: 400;
+}
+
+.avatar-container{
+    width: 32px;
+    margin-right: 15px;
+}
+
+.avatar-container > img{
+    width: 100%;
+    
+}
+
+.username{
+    margin-top: -8px;
+}
+
+.author{
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0px;
+    margin-right: 12px;
+    color: hsl(212, 24%, 26%);
+}
+
+.created-at{
+    font-size: 17px;
+    margin-top: -6px;
+    color: hsl(211, 10%, 45%);
+}
+
+.replying-to{
+    color: hsl(212, 24%, 26%);
+    font-weight: 700;
+}
+
+.replies{
+    padding-left: 88px;
+    margin-top: 28px;
+    position: relative;
+}
+
+.replies:before{
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 100%;
+    left: 42px;
+    background-color: hsl(211, 10%, 45%);
+    opacity: 0.1;
+}
+
+.create-comment.container{
+    min-height: 146px;
+}
+
+.user-avatar{
+    width: 80px;
+    text-align: center;
+    padding-top: 28px;
+}
+
+.user-avatar > img{
+    width: 40px;
+    height: 40px;
+}
+
+.user-input{
+    width: 100%;
+    max-width: 506px;
+    padding-top: 25px;
+}
+
+.user-input textarea{
+    width: calc( 100% - 34px );
+    margin: 0;
+    border: 1px solid rgba(103,114,126,0.4);;
+    font-family: Rubik;
+    font-size: 16px;
+    padding: 10px 16px;
+    min-height: 76px;
+    line-height: 24px;
+    border-radius: 8px;
+}
+
+.submit{
+    width: 144px;
+    color: white;
+    padding-top: 25px;
+    font-size: 16px;
+}
+
+.submit button{
+    background-color: hsl(238, 40%, 52%);
+    width: 104px;
+    height: 48px;
+    border-radius: 8px;
+}
