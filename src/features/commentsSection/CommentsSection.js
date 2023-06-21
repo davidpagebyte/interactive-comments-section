@@ -17,6 +17,9 @@ import {
 } from './commentsSectionSlice'
 
 import {CommentItem} from './CommentItem'
+
+import { CreateCommentSection } from './CreateCommentSection';
+
 const defaultStyle={
     backgroundColor:'red',
     width: 100,
@@ -37,24 +40,7 @@ export function CommentsSection(){
         <div id="comments-section">
             <div className="wrapper">
                 <ul className="thread">{topComments}</ul>
-                <div className="create-comment container">
-                    <div className='user-avatar align'>
-                        <img alt='avatar' src={avatarPng}></img>
-                    </div>
-                    <div className='user-input align'>
-                        <textarea className='text' value={currentText} onChange={(e) => dispatch(textareaChanged(e.target.value))}></textarea>
-                    </div>
-                    <div className='submit align' onClick={(e) => dispatch(add({
-                        id: latestCommentId,
-                        content: currentText,
-                        user: {
-                            username: currentUser.username
-                        }
-                    }))}>
-                        <button>SEND</button>
-                    </div>
-                    
-                </div>
+                <CreateCommentSection show={true} isReply={false} btnText="SEND" currentText={currentText}></CreateCommentSection>
             </div>
         </div>
     )

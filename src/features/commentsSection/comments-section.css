@@ -47,6 +47,9 @@ table {
 	border-spacing: 0;
 }
 
+.hide{
+    display: none;
+}
 
 button, input[type="submit"], input[type="reset"] {
 	background: none;
@@ -252,6 +255,10 @@ button, input[type="submit"], input[type="reset"] {
     min-height: 146px;
 }
 
+.create-comment.reply{
+    margin-top: 10px;
+}
+
 .user-avatar{
     width: 80px;
     text-align: center;
@@ -267,6 +274,10 @@ button, input[type="submit"], input[type="reset"] {
     width: 100%;
     max-width: 506px;
     padding-top: 25px;
+}
+
+.comment .replies .create-comment.reply .user-input{
+    max-width: 420px;
 }
 
 .user-input textarea{
