@@ -99,6 +99,7 @@ export const commentsSectionSlice = createSlice({
         },
         remove:  (state, action) => {
             removeComment(state.comments, action.payload)
+            state.showModal = -1
         },
         rateUp: (state, action) => {
             applyScore(state.comments, action.payload, "+")
@@ -123,6 +124,9 @@ export const commentsSectionSlice = createSlice({
         toggleReplySection: (state,action)=>{
             let comment = findComment(state.comments, action.payload)
             comment.showReplySection = !comment.showReplySection
+        },
+        setModalStatus: (state,action)=>{
+            state.showModal = action.payload
         }
     },
 });
@@ -188,7 +192,7 @@ export const findCommentParent = (comments,id) =>{
     return findComment(comments, id, true)
 }
 
-export const { add, reply, edit, remove,rateUp,rateDown,incrementByAmmount,textareaChanged, toggleReplySection } = commentsSectionSlice.actions;
+export const { add, reply, edit, remove,rateUp,rateDown,incrementByAmmount,textareaChanged, toggleReplySection, setModalStatus } = commentsSectionSlice.actions;
 
 
 
@@ -204,5 +208,7 @@ export const getCurrentUser = (state) => state.commentsSection.currentUser
 export const getCurrentText = (state) => state.commentsSection.textareaContent
 
 export const getLatestId = (state) => state.commentsSection.latestComment
+
+export const getModalStatus = (state) => state.commentsSection.showModal
 
 export default commentsSectionSlice.reducer;

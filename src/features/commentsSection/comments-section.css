@@ -135,7 +135,7 @@ button, input[type="submit"], input[type="reset"] {
     vertical-align: middle;
 }
 
-.header{
+.comment .header{
     text-align: left;
     padding-top: 25px;
     margin-bottom: 18px;
@@ -192,7 +192,7 @@ button, input[type="submit"], input[type="reset"] {
     background-image: url(./images/icon-delete.svg);
 }
 
-.message{
+.comment .message{
     font-size: 16px;
     text-align: left;
     padding-right: 40px;
@@ -304,4 +304,64 @@ button, input[type="submit"], input[type="reset"] {
     width: 104px;
     height: 48px;
     border-radius: 8px;
+}
+
+/* The Modal (background) */
+.modal {
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 28% auto;
+    padding: 34px 28px;
+    border: 1px solid #888;
+    width: 100%;
+    max-width: 338px;
+    min-height: 182px;
+    text-align: left;
+    border-radius: 10px;
+}
+
+.modal-content .header{
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 22px;
+}
+
+.modal-content .message{
+    font-size: 16px;
+    line-height: 24px;
+    color: hsl(211, 10%, 45%);
+    font-weight: 400;
+    margin-bottom: 18px;
+}
+
+.modal-content .delete-confirm{
+    color: white;
+    font-size: 16px;
+}
+
+.delete-confirm > button{
+    width: 159px;
+    height: 48px;
+    border-radius: 8px;
+}
+
+.modal-content .close{
+    background-color: hsl(358, 79%, 66%);
+    margin-left: 20px;
+}
+
+.modal-content .cancel{
+    background-color: hsl(211, 10%, 45%);
 }
