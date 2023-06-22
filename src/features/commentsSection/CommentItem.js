@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './comments-section.css'
-import {getCurrentUser, rateUp, rateDown, findCommentParent, getComments, toggleReplySection} from './commentsSectionSlice'
+import {getCurrentUser, rateUp, rateDown, findCommentParent, getComments, toggleReplySection, remove} from './commentsSectionSlice'
 
 import { CreateCommentSection } from './CreateCommentSection';
 import deleteIcon from './images/icon-delete.svg'
@@ -29,7 +29,7 @@ export function CommentItem(props){
         actionButtons = <button className="reply" onClick={(e)=>dispatch(toggleReplySection(commentData.id))}>Reply</button>
     } else{
         actionButtons = [
-            <button key={0} className="delete">Delete</button>,
+            <button key={0} className="delete" onClick={(e)=>dispatch(remove(commentData.id))}>Delete</button>,
             <button key={1} className="edit">Edit</button>
         ]
     }
