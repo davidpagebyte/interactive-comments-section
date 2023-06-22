@@ -93,19 +93,11 @@ export const commentsSectionSlice = createSlice({
             state.latestComment += 1
 
         },
-        edit:  (state) => {
-            // Redux Toolkit allows us to write "mutating" logic in reducers. It
-            // doesn't actually mutate the state because it uses the Immer library,
-            // which detects changes to a "draft state" and produces a brand new
-            // immutable state based off those changes
-            state.value += 1;
+        edit:  (state, action) => {
+            
         },
-        remove:  (state) => {
-            // Redux Toolkit allows us to write "mutating" logic in reducers. It
-            // doesn't actually mutate the state because it uses the Immer library,
-            // which detects changes to a "draft state" and produces a brand new
-            // immutable state based off those changes
-            state.value += 1;
+        remove:  (state, action) => {
+            removeComment(state.comments, action.payload)
         },
         rateUp: (state, action) => {
             applyScore(state.comments, action.payload, "+")
@@ -156,6 +148,27 @@ function findComment(comments, id, getParent){
                         return comments[i]
                     } else{
                         return found
+                    }
+                }
+            }
+        }
+    }
+    return false
+}
+
+function removeComment(comments, id){
+    for( let i = 0; i < comments.length; i++ ){
+        if(comments[i].id === id){
+            comments.splice(i,1)
+            return true
+        } else{
+            if( typeof comments[i].replies === "undefined" || comments[i].replies.length === 0 ){
+                continue;
+            } else{
+                for( let j = 0; j < comments[i].replies.length; j++ ){
+                    if( comments[i].replies[j].id === id ){
+                        comments[i].replies.splice(j,1)
+                        return true
                     }
                 }
             }
