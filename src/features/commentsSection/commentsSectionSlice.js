@@ -52,7 +52,7 @@ function _initData(comments){
     })
     return comments
 }
-initialState.comments = _initData(initialState.comments)
+initialState.comments = sortCommentsByScore(_initData(initialState.comments))
 
 export const commentsSectionSlice = createSlice({
     name: 'commentsSection',
@@ -65,6 +65,7 @@ export const commentsSectionSlice = createSlice({
                 state.textareaContent = ""
                 state.latestComment += 1
                 state.comments.push(action.payload)
+                state.comments = sortCommentsByScore(state.comments)
             },
             prepare:(commentAttrs) => {
                 return {
@@ -101,9 +102,11 @@ export const commentsSectionSlice = createSlice({
         },
         rateUp: (state, action) => {
             applyScore(state.comments, action.payload, "+")
+            state.comments = sortCommentsByScore(state.comments)
         },
         rateDown: (state,action) => {
             applyScore(state.comments, action.payload, "-")
+            state.comments = sortCommentsByScore(state.comments)
         },
         // Use the PayloadAction type to declare the contents of `action.payload`
         incrementByAmmount: (state, action) => {
@@ -175,6 +178,10 @@ function removeComment(comments, id){
         }
     }
     return false
+}
+
+function sortCommentsByScore(comments){
+    return comments.sort((a,b)=>b.score-a.score)
 }
 
 export const findCommentParent = (comments,id) =>{
