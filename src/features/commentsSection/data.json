@@ -66,5 +66,6 @@
         }
     ],
     "textareaContent":"",
-    "latestComment": 4
+    "latestComment": 4,
+    "showModal":-1
 }

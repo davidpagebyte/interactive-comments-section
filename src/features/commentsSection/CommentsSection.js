@@ -20,6 +20,8 @@ import {CommentItem} from './CommentItem'
 
 import { CreateCommentSection } from './CreateCommentSection';
 
+import { ModalConfirmation } from './ModalConfirmation';
+
 const defaultStyle={
     backgroundColor:'red',
     width: 100,
@@ -42,6 +44,7 @@ export function CommentsSection(){
                 <ul className="thread">{topComments}</ul>
                 <CreateCommentSection show={true} isReply={false} btnText="SEND" currentText={currentText}></CreateCommentSection>
             </div>
+            <ModalConfirmation></ModalConfirmation>
         </div>
     )
 }
