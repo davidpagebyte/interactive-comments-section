@@ -96,8 +96,9 @@ export const commentsSectionSlice = createSlice({
             state.latestComment += 1
 
         },
-        edit:  (state, action) => {
-            
+        editModeToggle:  (state, action) => {
+            let commentToEdit = findComment(state.comments, action.payload)
+            commentToEdit.isEditing = !commentToEdit.isEditing
         },
         remove:  (state, action) => {
             removeComment(state.comments, action.payload)
@@ -194,7 +195,7 @@ export const findCommentParent = (comments,id) =>{
     return findComment(comments, id, true)
 }
 
-export const { add, reply, edit, remove,rateUp,rateDown,incrementByAmmount,textareaChanged, toggleReplySection, setModalStatus } = commentsSectionSlice.actions;
+export const { add, reply, editModeToggle, remove,rateUp,rateDown,incrementByAmmount,textareaChanged, toggleReplySection, setModalStatus } = commentsSectionSlice.actions;
 
 
 

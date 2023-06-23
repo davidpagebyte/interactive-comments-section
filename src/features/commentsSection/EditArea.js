@@ -16,7 +16,7 @@ import {
 
 export function EditArea(props){
     const dispatch = useDispatch()
-    const className = `edit-area ${!props.isEditing? '' : 'hide'}`
+    const className = `edit-area ${props.isEditing? '' : 'hide'}`
     return (
         <div className={className}>
             <textarea className="edit-message" value={props.content}>
