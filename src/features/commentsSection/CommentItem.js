@@ -4,11 +4,7 @@ import './comments-section.css'
 import {getCurrentUser, rateUp, rateDown, findCommentParent, getComments, toggleReplySection, setModalStatus} from './commentsSectionSlice'
 
 import { CreateCommentSection } from './CreateCommentSection';
-import deleteIcon from './images/icon-delete.svg'
-import editIcon from './images/icon-edit.svg'
-import replyIcon from './images/icon-reply.svg'
-import plusIcon from './images/icon-plus.svg'
-import minusIcon from './images/icon-minus.svg'
+import { EditArea } from './EditArea';
 
 export function CommentItem(props){
     const dispatch = useDispatch()
@@ -58,6 +54,7 @@ export function CommentItem(props){
                     </div>
                     <div className="message">
                         <p className="text">{replyingTo} {commentData.content}</p>
+                        <EditArea replyingTo={commentData.replyingTo} content={commentData.composedContent} isEditing={commentData.isEditing}></EditArea>
                     </div>
                 </div>
             </div>

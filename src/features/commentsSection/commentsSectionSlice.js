@@ -32,7 +32,9 @@ export const commentFactory = function (attrs){
         "replies": replies,
         "replyingTo" : null,
         "replyText":replyText,
-        "showReplySection": showReplySection
+        "showReplySection": showReplySection,
+        "isEditing": false,
+        "composedContent": `${replyingTo === null?'':'@'+replyingTo+' '}${content}`
     }
 
     if( replyingTo !== null ){
