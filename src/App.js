@@ -1,6 +1,5 @@
 import React from 'react';
 import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
 import { CommentsSection } from './features/commentsSection/CommentsSection';
 import './App.css';
 
