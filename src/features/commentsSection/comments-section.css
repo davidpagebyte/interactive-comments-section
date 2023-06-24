@@ -365,3 +365,33 @@ button, input[type="submit"], input[type="reset"] {
 .modal-content .cancel{
     background-color: hsl(211, 10%, 45%);
 }
+
+.edit-area{
+
+}
+
+.edit-message{
+    display: block;
+    width: calc(100% - 34px);
+    min-height: 94px;
+    color: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    font-weight: inherit;
+    overflow: hidden;
+    font-family: inherit;
+    border: 1px solid rgba(103,114,126,0.4);
+    border-radius: 8px;
+    padding: 10px 16px;
+    margin-bottom: 16px;
+}
+
+.update-submit{
+    background-color: hsl(238, 40%, 52%);
+    width: 104px;
+    height: 48px;
+    border-radius: 8px;
+    color: white;
+    float: right;
+    margin-bottom: 25px;
+}

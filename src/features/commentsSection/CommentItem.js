@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './comments-section.css'
-import {getCurrentUser, rateUp, rateDown, findCommentParent, getComments, toggleReplySection, setModalStatus} from './commentsSectionSlice'
+import {getCurrentUser, rateUp, rateDown, findCommentParent, getComments, toggleReplySection, setModalStatus, editModeToggle} from './commentsSectionSlice'
 
 import { CreateCommentSection } from './CreateCommentSection';
-import deleteIcon from './images/icon-delete.svg'
-import editIcon from './images/icon-edit.svg'
-import replyIcon from './images/icon-reply.svg'
-import plusIcon from './images/icon-plus.svg'
-import minusIcon from './images/icon-minus.svg'
+import { EditArea } from './EditArea';
 
 export function CommentItem(props){
     const dispatch = useDispatch()
@@ -30,7 +26,7 @@ export function CommentItem(props){
     } else{
         actionButtons = [
             <button key={0} className="delete" onClick={(e)=>dispatch(setModalStatus(commentData.id))}>Delete</button>,
-            <button key={1} className="edit">Edit</button>
+            <button key={1} className="edit" onClick={(e)=>dispatch(editModeToggle(commentData.id))}>Edit</button>
         ]
     }
     return (
@@ -57,7 +53,8 @@ export function CommentItem(props){
                         {actionButtons}
                     </div>
                     <div className="message">
-                        <p className="text">{replyingTo} {commentData.content}</p>
+                        <p className={`text${commentData.isEditing? ' hide':''}`}>{replyingTo} {commentData.content}</p>
+                        <EditArea id={commentData.id} replyingTo={commentData.replyingTo} content={commentData.composedContent} isEditing={commentData.isEditing}></EditArea>
                     </div>
                 </div>
             </div>
