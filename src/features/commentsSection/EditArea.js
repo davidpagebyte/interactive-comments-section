@@ -12,6 +12,8 @@ import {
     getCurrentUser,
     getCurrentText,
     getLatestId,
+    ongoingTextEdit,
+    finishEdit
 } from './commentsSectionSlice'
 
 export function EditArea(props){
@@ -19,10 +21,10 @@ export function EditArea(props){
     const className = `edit-area ${props.isEditing? '' : 'hide'}`
     return (
         <div className={className}>
-            <textarea className="edit-message" value={props.content}>
+            <textarea className="edit-message" value={props.content} onChange={(e)=>dispatch(ongoingTextEdit({id:props.id,text:e.target.value}))}>
 
             </textarea>
-            <button className="update-submit">UPDATE</button>
+            <button className="update-submit" onClick={(e)=>dispatch(finishEdit(props.id))}>UPDATE</button>
         </div>
     )
 }

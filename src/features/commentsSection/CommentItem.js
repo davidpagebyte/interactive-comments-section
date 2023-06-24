@@ -54,7 +54,7 @@ export function CommentItem(props){
                     </div>
                     <div className="message">
                         <p className={`text${commentData.isEditing? ' hide':''}`}>{replyingTo} {commentData.content}</p>
-                        <EditArea replyingTo={commentData.replyingTo} content={commentData.composedContent} isEditing={commentData.isEditing}></EditArea>
+                        <EditArea id={commentData.id} replyingTo={commentData.replyingTo} content={commentData.composedContent} isEditing={commentData.isEditing}></EditArea>
                     </div>
                 </div>
             </div>

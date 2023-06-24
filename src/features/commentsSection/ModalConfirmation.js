@@ -13,7 +13,6 @@ import minusIcon from './images/icon-minus.svg'
 export function ModalConfirmation(props){
     const dispatch = useDispatch()
     const modalStatus = useSelector(getModalStatus)
-    console.log(modalStatus)
     let className =  `modal ${(modalStatus < 0)? 'hide':''}`
 
     return (

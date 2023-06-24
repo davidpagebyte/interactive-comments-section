@@ -97,8 +97,15 @@ export const commentsSectionSlice = createSlice({
 
         },
         editModeToggle:  (state, action) => {
-            let commentToEdit = findComment(state.comments, action.payload)
-            commentToEdit.isEditing = !commentToEdit.isEditing
+            let comment = findComment(state.comments, action.payload)
+            comment.isEditing = !comment.isEditing
+            if(!comment.isEditing){
+                //Hiding edit area without submiting changes. Reseting textarea
+                comment.composedContent = comment.content
+                if( comment.replyingTo !== null ){
+                    comment.composedContent = `@${comment.replyingTo} ${comment.composedContent}`
+                }
+            }
         },
         remove:  (state, action) => {
             removeComment(state.comments, action.payload)
@@ -130,7 +137,36 @@ export const commentsSectionSlice = createSlice({
         },
         setModalStatus: (state,action)=>{
             state.showModal = action.payload
-        }
+        },
+        ongoingTextEdit: (state,action)=>{
+            let comment = findComment(state.comments, action.payload.id)
+            comment.composedContent = action.payload.text
+        },
+        finishEdit: (state,action)=>{
+            let comment = findComment(state.comments, action.payload)
+            if(comment.replyingTo === null){
+                comment.content = comment.composedContent
+            } else{
+                if(comment.composedContent.search(`@${comment.replyingTo}`) > -1){
+                    comment.composedContent = comment.composedContent.replace(`@${comment.replyingTo}`,'')
+                } else{
+                    const indexOfTag = comment.composedContent.search('@') 
+                    if( indexOfTag === 0 ){
+                        //Tag was partially deleted, find end of partial tag
+                        let endIndex = comment.composedContent.search(' ');
+                        if( endIndex > -1 ){
+                            let substringToRemove = comment.composedContent.substring(0,endIndex)
+                            console.log('String to remove is '+substringToRemove)
+                            comment.composedContent = comment.composedContent.replace(substringToRemove,"")
+                            
+                        }
+                    }
+                }
+                comment.content = comment.composedContent
+                comment.composedContent = `@${comment.replyingTo} ${comment.composedContent}`
+            }
+            comment.isEditing = false
+        },
     },
 });
 
@@ -195,7 +231,20 @@ export const findCommentParent = (comments,id) =>{
     return findComment(comments, id, true)
 }
 
-export const { add, reply, editModeToggle, remove,rateUp,rateDown,incrementByAmmount,textareaChanged, toggleReplySection, setModalStatus } = commentsSectionSlice.actions;
+export const { 
+    add, 
+    reply, 
+    editModeToggle, 
+    remove,
+    rateUp,
+    rateDown,
+    incrementByAmmount,
+    textareaChanged, 
+    toggleReplySection, 
+    setModalStatus, 
+    ongoingTextEdit,
+    finishEdit 
+} = commentsSectionSlice.actions;
 
 
 
