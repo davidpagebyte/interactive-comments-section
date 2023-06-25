@@ -1,17 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useRef, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import {
-    add,
-    reply,
-    edit,
-    remove,
-    rateUp,
-    rateDown,
-    textareaChanged,
-    getComments,
-    getCurrentUser,
-    getCurrentText,
-    getLatestId,
     ongoingTextEdit,
     finishEdit
 } from './commentsSectionSlice'

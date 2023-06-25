@@ -3,14 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
     add,
     reply,
-    edit,
-    remove,
-    rateUp,
-    rateDown,
     textareaChanged,
-    getComments,
     getCurrentUser,
-    getCurrentText,
     getLatestId,
 } from './commentsSectionSlice'
 

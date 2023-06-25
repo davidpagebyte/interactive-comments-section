@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './comments-section.css'
 import {getCurrentUser, rateUp, rateDown, findCommentParent, getComments, toggleReplySection, setModalStatus, editModeToggle} from './commentsSectionSlice'
-
 import { CreateCommentSection } from './CreateCommentSection';
 import { EditArea } from './EditArea';
 

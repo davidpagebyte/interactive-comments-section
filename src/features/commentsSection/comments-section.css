@@ -97,10 +97,6 @@ button, input[type="submit"], input[type="reset"] {
     padding:64px 0px;
 }
 
-.thread{
-    
-}
-
 .comment{
     width: 100%;
     margin-bottom: 28px;
@@ -196,16 +192,8 @@ button, input[type="submit"], input[type="reset"] {
     background-repeat: no-repeat;
 }
 
-.reply{
-
-}
-
 .reply:before{
     background-image: url(./images/icon-reply.svg);
-}
-
-.edit{
-
 }
 
 .edit:before{
@@ -374,10 +362,6 @@ button, input[type="submit"], input[type="reset"] {
 
 .modal-content .cancel{
     background-color: hsl(211, 10%, 45%);
-}
-
-.edit-area{
-
 }
 
 .edit-message{

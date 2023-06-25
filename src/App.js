@@ -1,5 +1,3 @@
-import React from 'react';
-import logo from './logo.svg';
 import { CommentsSection } from './features/commentsSection/CommentsSection';
 import './App.css';
 

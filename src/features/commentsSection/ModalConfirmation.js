@@ -1,14 +1,6 @@
-import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './comments-section.css'
-import {getCurrentUser, rateUp, rateDown, findCommentParent, getComments, toggleReplySection, remove, getModalStatus, setModalStatus} from './commentsSectionSlice'
-
-import { CreateCommentSection } from './CreateCommentSection';
-import deleteIcon from './images/icon-delete.svg'
-import editIcon from './images/icon-edit.svg'
-import replyIcon from './images/icon-reply.svg'
-import plusIcon from './images/icon-plus.svg'
-import minusIcon from './images/icon-minus.svg'
+import { remove, getModalStatus, setModalStatus } from './commentsSectionSlice'
 
 export function ModalConfirmation(props){
     const dispatch = useDispatch()
