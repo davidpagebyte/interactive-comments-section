@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
     add,
@@ -9,6 +9,12 @@ import {
 } from './commentsSectionSlice'
 
 export function CreateCommentSection(props){
+    const textareaRef = useRef(null)
+    useEffect(()=>{
+        if(props.show){
+            textareaRef.current.focus() 
+        }
+    }, [props.show])
     const dispatch = useDispatch()
     const btnText = (typeof props.btnText === "undefined")? "SEND" : props.btnText;
     const currentUser = useSelector(getCurrentUser)
@@ -25,7 +31,7 @@ export function CreateCommentSection(props){
                 <img alt='avatar' src={avatarPng}></img>
             </div>
             <div className='user-input align'>
-                <textarea className='text raw-comment-text' value={currentText} onChange={(e) => dispatch(textareaChanged({value: e.target.value, isReply: props.isReply,repliedComment: props.id}))}></textarea>
+                <textarea ref={textareaRef} className='text raw-comment-text' value={currentText} onChange={(e) => dispatch(textareaChanged({value: e.target.value, isReply: props.isReply,repliedComment: props.id}))}></textarea>
             </div>
             <div className='submit align' onClick={(e) => dispatch(createAction({
                 id: latestCommentId+1,
