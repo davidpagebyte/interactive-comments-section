@@ -21,7 +21,7 @@ export function EditArea(props){
     const className = `edit-area ${props.isEditing? '' : 'hide'}`
     return (
         <div className={className}>
-            <textarea className="edit-message" value={props.content} onChange={(e)=>dispatch(ongoingTextEdit({id:props.id,text:e.target.value}))}>
+            <textarea className="edit-message raw-comment-text" value={props.content} onChange={(e)=>dispatch(ongoingTextEdit({id:props.id,text:e.target.value}))}>
 
             </textarea>
             <button className="update-submit primary-button submit-btn" onClick={(e)=>dispatch(finishEdit(props.id))}>UPDATE</button>

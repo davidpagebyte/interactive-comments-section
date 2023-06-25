@@ -62,6 +62,18 @@ table {
     background-color: hsl(238, 40%, 52%);;
 }
 
+.raw-comment-text{
+    width: calc( 100% - 34px );
+    font-size: 16px;
+    font-family: Rubik;
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: 1px solid rgba(103,114,126,0.4);
+    line-height: 24px;
+    overflow: hidden;
+    color: black;
+}
+
 button, input[type="submit"], input[type="reset"] {
 	background: none;
 	color: inherit;
@@ -208,9 +220,9 @@ button, input[type="submit"], input[type="reset"] {
     text-align: left;
     padding-right: 40px;
     margin-top: -7px;
-    line-height: 24px;
     color: hsl(211, 10%, 45%);
     font-weight: 400;
+    line-height: 24px;
 }
 
 .avatar-container{
@@ -292,15 +304,8 @@ button, input[type="submit"], input[type="reset"] {
 }
 
 .user-input textarea{
-    width: calc( 100% - 34px );
     margin: 0;
-    border: 1px solid rgba(103,114,126,0.4);;
-    font-family: Rubik;
-    font-size: 16px;
-    padding: 10px 16px;
     min-height: 76px;
-    line-height: 24px;
-    border-radius: 8px;
 }
 
 .submit{
@@ -372,17 +377,7 @@ button, input[type="submit"], input[type="reset"] {
 
 .edit-message{
     display: block;
-    width: calc(100% - 34px);
     min-height: 94px;
-    color: inherit;
-    font-size: inherit;
-    line-height: inherit;
-    font-weight: inherit;
-    overflow: hidden;
-    font-family: inherit;
-    border: 1px solid rgba(103,114,126,0.4);
-    border-radius: 8px;
-    padding: 10px 16px;
     margin-bottom: 16px;
 }
 
