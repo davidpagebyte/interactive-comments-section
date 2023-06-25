@@ -19,8 +19,6 @@ import {
 export function EditArea(props){
     const textareaRef = useRef(null);
     useEffect(()=>{
-        console.log(props.isEditing)
-        console.log(textareaRef.current);
         if(props.isEditing){
             textareaRef.current.focus() 
             textareaRef.current.selectionStart = textareaRef.current.value.length;

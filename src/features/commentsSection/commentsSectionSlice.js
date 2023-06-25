@@ -134,6 +134,7 @@ export const commentsSectionSlice = createSlice({
         toggleReplySection: (state,action)=>{
             let comment = findComment(state.comments, action.payload)
             comment.showReplySection = !comment.showReplySection
+            comment.replyText = "";
         },
         setModalStatus: (state,action)=>{
             state.showModal = action.payload
