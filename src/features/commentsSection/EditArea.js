@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
     add,
@@ -17,11 +17,20 @@ import {
 } from './commentsSectionSlice'
 
 export function EditArea(props){
+    const textareaRef = useRef(null);
+    useEffect(()=>{
+        console.log(props.isEditing)
+        console.log(textareaRef.current);
+        if(props.isEditing){
+            textareaRef.current.focus() 
+            textareaRef.current.selectionStart = textareaRef.current.value.length;
+        }
+    }, [props.isEditing])
     const dispatch = useDispatch()
     const className = `edit-area ${props.isEditing? '' : 'hide'}`
     return (
         <div className={className}>
-            <textarea className="edit-message raw-comment-text" value={props.content} onChange={(e)=>dispatch(ongoingTextEdit({id:props.id,text:e.target.value}))}>
+            <textarea ref={textareaRef} className="edit-message raw-comment-text" value={props.content} onChange={(e)=>dispatch(ongoingTextEdit({id:props.id,text:e.target.value}))}>
 
             </textarea>
             <button className="update-submit primary-button submit-btn" onClick={(e)=>dispatch(finishEdit(props.id))}>UPDATE</button>
