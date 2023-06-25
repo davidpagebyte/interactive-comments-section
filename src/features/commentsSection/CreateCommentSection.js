@@ -3,14 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
     add,
     reply,
-    edit,
-    remove,
-    rateUp,
-    rateDown,
     textareaChanged,
-    getComments,
     getCurrentUser,
-    getCurrentText,
     getLatestId,
 } from './commentsSectionSlice'
 
@@ -31,7 +25,7 @@ export function CreateCommentSection(props){
                 <img alt='avatar' src={avatarPng}></img>
             </div>
             <div className='user-input align'>
-                <textarea className='text' value={currentText} onChange={(e) => dispatch(textareaChanged({value: e.target.value, isReply: props.isReply,repliedComment: props.id}))}></textarea>
+                <textarea className='text raw-comment-text' value={currentText} onChange={(e) => dispatch(textareaChanged({value: e.target.value, isReply: props.isReply,repliedComment: props.id}))}></textarea>
             </div>
             <div className='submit align' onClick={(e) => dispatch(createAction({
                 id: latestCommentId+1,
@@ -43,7 +37,7 @@ export function CreateCommentSection(props){
                 commentId: props.id,
                 replyingTo: props.replyingTo
             }))}>
-                <button>{btnText}</button>
+                <button className="primary-button submit-btn">{btnText}</button>
             </div>
             
         </div>

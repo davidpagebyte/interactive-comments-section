@@ -51,6 +51,30 @@ table {
     display: none;
 }
 
+.primary-button{
+    color: white;
+    border-radius: 8px;
+    height: 48px;
+    font-size: 16px;
+}
+
+.submit-btn{
+    background-color: hsl(238, 40%, 52%);;
+}
+
+.raw-comment-text{
+    width: calc( 100% - 34px );
+    font-size: 16px;
+    font-family: Rubik;
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: 1px solid rgba(103,114,126,0.4);
+    line-height: 24px;
+    overflow: hidden;
+    color: black;
+    resize: none;
+}
+
 button, input[type="submit"], input[type="reset"] {
 	background: none;
 	color: inherit;
@@ -71,10 +95,6 @@ button, input[type="submit"], input[type="reset"] {
     margin: 0 auto;
     max-width: 732px;
     padding:64px 0px;
-}
-
-.thread{
-    
 }
 
 .comment{
@@ -100,6 +120,7 @@ button, input[type="submit"], input[type="reset"] {
     border-radius: 10px;
     font-size: 16px;
     font-weight: 500;
+    color: hsl(238, 40%, 52%);
 }
 
 .increase,
@@ -144,16 +165,20 @@ button, input[type="submit"], input[type="reset"] {
 .actions{
     position: absolute;
     top: 0;
-    width: 100%;
+    width: calc(100% - 40px);
     text-align: right;
     font-size: 16px;
     font-weight: 500;
-    padding-top: 32px;
+    padding: 32px 40px 0 0;
+    color: hsl(238, 40%, 52%);
 }
 
 .actions > button{
-    margin-right: 26px;
     position: relative;
+}
+
+.actions > button:not(:last-child){
+    margin-right: 44px;
 }
 
 .actions > button:before{
@@ -164,20 +189,11 @@ button, input[type="submit"], input[type="reset"] {
     background-size: 14px;
     position: absolute;
     left: -21px;
-    top: 2px;
     background-repeat: no-repeat;
-}
-
-.reply{
-
 }
 
 .reply:before{
     background-image: url(./images/icon-reply.svg);
-}
-
-.edit{
-
 }
 
 .edit:before{
@@ -185,7 +201,7 @@ button, input[type="submit"], input[type="reset"] {
 }
 
 .delete{
-
+    color:hsl(358, 79%, 66%);
 }
 
 .delete:before{
@@ -197,9 +213,9 @@ button, input[type="submit"], input[type="reset"] {
     text-align: left;
     padding-right: 40px;
     margin-top: -7px;
-    line-height: 24px;
     color: hsl(211, 10%, 45%);
     font-weight: 400;
+    line-height: 24px;
 }
 
 .avatar-container{
@@ -281,29 +297,18 @@ button, input[type="submit"], input[type="reset"] {
 }
 
 .user-input textarea{
-    width: calc( 100% - 34px );
     margin: 0;
-    border: 1px solid rgba(103,114,126,0.4);;
-    font-family: Rubik;
-    font-size: 16px;
-    padding: 10px 16px;
     min-height: 76px;
-    line-height: 24px;
-    border-radius: 8px;
 }
 
 .submit{
     width: 144px;
     color: white;
     padding-top: 25px;
-    font-size: 16px;
 }
 
 .submit button{
-    background-color: hsl(238, 40%, 52%);
     width: 104px;
-    height: 48px;
-    border-radius: 8px;
 }
 
 /* The Modal (background) */
@@ -346,15 +351,8 @@ button, input[type="submit"], input[type="reset"] {
     margin-bottom: 18px;
 }
 
-.modal-content .delete-confirm{
-    color: white;
-    font-size: 16px;
-}
-
 .delete-confirm > button{
     width: 159px;
-    height: 48px;
-    border-radius: 8px;
 }
 
 .modal-content .close{
@@ -366,32 +364,15 @@ button, input[type="submit"], input[type="reset"] {
     background-color: hsl(211, 10%, 45%);
 }
 
-.edit-area{
-
-}
-
 .edit-message{
     display: block;
-    width: calc(100% - 34px);
     min-height: 94px;
-    color: inherit;
-    font-size: inherit;
-    line-height: inherit;
-    font-weight: inherit;
-    overflow: hidden;
-    font-family: inherit;
-    border: 1px solid rgba(103,114,126,0.4);
-    border-radius: 8px;
-    padding: 10px 16px;
     margin-bottom: 16px;
 }
 
 .update-submit{
     background-color: hsl(238, 40%, 52%);
     width: 104px;
-    height: 48px;
-    border-radius: 8px;
-    color: white;
     float: right;
     margin-bottom: 25px;
 }

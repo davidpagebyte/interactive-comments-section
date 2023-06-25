@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import initialData from './data.json'
 
 let initialState = initialData;
@@ -40,9 +40,7 @@ export const commentFactory = function (attrs){
     if( replyingTo !== null ){
         newComment.replyingTo = replyingTo
     }
-
     return newComment
-
 }
 
 function _initData(comments){
@@ -76,22 +74,11 @@ export const commentsSectionSlice = createSlice({
             }
         },
         reply: (state, action) => {
-            /*
-            id: latestCommentId,
-                content: currentText,
-                user: {
-                    username: currentUser.username
-                },
-                parentComment: parentComment
-            */
             const parentComment = findComment(state.comments, action.payload.parentComment)
             let commentReplied = findComment(state.comments, action.payload.commentId)
             commentReplied.showReplySection=false
-
             commentReplied.replyText = ""
-
             const newComment = commentFactory(action.payload)
-
             parentComment.replies.push(newComment)
             state.latestComment += 1
 
@@ -134,6 +121,7 @@ export const commentsSectionSlice = createSlice({
         toggleReplySection: (state,action)=>{
             let comment = findComment(state.comments, action.payload)
             comment.showReplySection = !comment.showReplySection
+            comment.replyText = "";
         },
         setModalStatus: (state,action)=>{
             state.showModal = action.payload
