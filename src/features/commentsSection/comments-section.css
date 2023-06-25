@@ -322,12 +322,12 @@ button, input[type="submit"], input[type="reset"] {
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    overflow: hidden;
 }
 
 /* Modal Content/Box */
 .modal-content {
     background-color: #fefefe;
-    margin: 28% auto;
     padding: 34px 28px;
     border: 1px solid #888;
     width: 100%;
@@ -335,6 +335,9 @@ button, input[type="submit"], input[type="reset"] {
     min-height: 182px;
     text-align: left;
     border-radius: 10px;
+    position: absolute;
+    top: calc(50% - 127px);
+    left: calc(50% - 198px);
 }
 
 .modal-content .header{
