@@ -43,7 +43,7 @@ export function CreateCommentSection(props){
                 commentId: props.id,
                 replyingTo: props.replyingTo
             }))}>
-                <button>{btnText}</button>
+                <button className="primary-button submit-btn">{btnText}</button>
             </div>
             
         </div>

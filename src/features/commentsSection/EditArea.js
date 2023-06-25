@@ -24,7 +24,7 @@ export function EditArea(props){
             <textarea className="edit-message" value={props.content} onChange={(e)=>dispatch(ongoingTextEdit({id:props.id,text:e.target.value}))}>
 
             </textarea>
-            <button className="update-submit" onClick={(e)=>dispatch(finishEdit(props.id))}>UPDATE</button>
+            <button className="update-submit primary-button submit-btn" onClick={(e)=>dispatch(finishEdit(props.id))}>UPDATE</button>
         </div>
     )
 }

@@ -51,6 +51,17 @@ table {
     display: none;
 }
 
+.primary-button{
+    color: white;
+    border-radius: 8px;
+    height: 48px;
+    font-size: 16px;
+}
+
+.submit-btn{
+    background-color: hsl(238, 40%, 52%);;
+}
+
 button, input[type="submit"], input[type="reset"] {
 	background: none;
 	color: inherit;
@@ -296,14 +307,10 @@ button, input[type="submit"], input[type="reset"] {
     width: 144px;
     color: white;
     padding-top: 25px;
-    font-size: 16px;
 }
 
 .submit button{
-    background-color: hsl(238, 40%, 52%);
     width: 104px;
-    height: 48px;
-    border-radius: 8px;
 }
 
 /* The Modal (background) */
@@ -346,15 +353,8 @@ button, input[type="submit"], input[type="reset"] {
     margin-bottom: 18px;
 }
 
-.modal-content .delete-confirm{
-    color: white;
-    font-size: 16px;
-}
-
 .delete-confirm > button{
     width: 159px;
-    height: 48px;
-    border-radius: 8px;
 }
 
 .modal-content .close{
@@ -389,9 +389,6 @@ button, input[type="submit"], input[type="reset"] {
 .update-submit{
     background-color: hsl(238, 40%, 52%);
     width: 104px;
-    height: 48px;
-    border-radius: 8px;
-    color: white;
     float: right;
     margin-bottom: 25px;
 }

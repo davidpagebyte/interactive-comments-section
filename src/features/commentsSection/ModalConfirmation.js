@@ -21,8 +21,8 @@ export function ModalConfirmation(props){
                 <h3 className="header">Delete comment</h3>
                 <p className="message">Are you sure you want to delete this comment? This will remove the comment and can't be undone</p>
                 <div className="delete-confirm" >
-                    <button className="cancel align" onClick={(e=>dispatch(setModalStatus(-1)))}>NO, CANCEL</button>
-                    <button className="close align" onClick={(e=>dispatch(remove(modalStatus)))}>YES, DELETE</button>
+                    <button className="cancel align primary-button" onClick={(e=>dispatch(setModalStatus(-1)))}>NO, CANCEL</button>
+                    <button className="close align primary-button" onClick={(e=>dispatch(remove(modalStatus)))}>YES, DELETE</button>
                 </div>
             </div>
         </div>
