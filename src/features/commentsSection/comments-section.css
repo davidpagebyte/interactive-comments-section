@@ -123,6 +123,7 @@ button, input[type="submit"], input[type="reset"] {
     border-radius: 10px;
     font-size: 16px;
     font-weight: 500;
+    color: hsl(238, 40%, 52%);
 }
 
 .increase,
@@ -167,16 +168,20 @@ button, input[type="submit"], input[type="reset"] {
 .actions{
     position: absolute;
     top: 0;
-    width: 100%;
+    width: calc(100% - 40px);
     text-align: right;
     font-size: 16px;
     font-weight: 500;
-    padding-top: 32px;
+    padding: 32px 40px 0 0;
+    color: hsl(238, 40%, 52%);
 }
 
 .actions > button{
-    margin-right: 26px;
     position: relative;
+}
+
+.actions > button:not(:last-child){
+    margin-right: 44px;
 }
 
 .actions > button:before{
@@ -187,7 +192,6 @@ button, input[type="submit"], input[type="reset"] {
     background-size: 14px;
     position: absolute;
     left: -21px;
-    top: 2px;
     background-repeat: no-repeat;
 }
 
@@ -208,7 +212,7 @@ button, input[type="submit"], input[type="reset"] {
 }
 
 .delete{
-
+    color:hsl(358, 79%, 66%);
 }
 
 .delete:before{
