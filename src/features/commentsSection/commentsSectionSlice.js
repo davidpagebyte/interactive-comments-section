@@ -72,7 +72,8 @@ initialState = _loadData()
 
 if(initialState === null){
     initialState = defaultData;
-    initialState.comments = sortCommentsByScore(_initData(initialState.comments))
+    initialState.comments = _initData(initialState.comments)
+    initialState.comments.sort((a,b)=>b.score-a.score)
 }
 
 export const commentsSectionSlice = createSlice({
@@ -85,8 +86,7 @@ export const commentsSectionSlice = createSlice({
             reducer: (state, action) => {
                 state.textareaContent = ""
                 state.latestComment += 1
-                state.comments.push(action.payload)
-                state.comments = sortCommentsByScore(state.comments)
+                _insertCommentInPlace(state.comments,action.payload)
                 _saveState(state)
             },
             prepare:(commentAttrs) => {
@@ -122,13 +122,17 @@ export const commentsSectionSlice = createSlice({
             _saveState(state)
         },
         rateUp: (state, action) => {
-            applyScore(state.comments, action.payload, "+")
-            state.comments = sortCommentsByScore(state.comments)
+            const isReply = applyScore(state.comments, action.payload, "+")
+            if(!isReply){
+                _rearrangeComments(state.comments, action.payload)
+            }
             _saveState(state)
         },
         rateDown: (state,action) => {
-            applyScore(state.comments, action.payload, "-")
-            state.comments = sortCommentsByScore(state.comments)
+            const isReply = applyScore(state.comments, action.payload, "-")
+            if(!isReply){
+                _rearrangeComments(state.comments, action.payload)
+            }
             _saveState(state)
         },
         textareaChanged: (state,action)=>{
@@ -186,21 +190,24 @@ function applyScore(comments, commentId, operation){
     } else{
         commentToEdit.score -= 1
     }
+    //Inform if scored comment is a reply
+    return commentToEdit.replyingTo !== null;
 }
 
-function findComment(comments, id, getParent){
+function findComment(comments, id, getParent, getIndex){
     getParent = ( typeof getParent === "undefined" )? false:getParent;
+    getIndex = ( typeof getIndex === "undefined" )? false:getIndex;
     for( let i = 0; i < comments.length; i++ ){
         if(comments[i].id === id){
-            return comments[i]
+            return getIndex? i : comments[i]
         } else{
             if( typeof comments[i].replies === "undefined" || comments[i].replies.length === 0 ){
                 continue;
             } else{
-                let found = findComment(comments[i].replies, id)
+                let found = findComment(comments[i].replies, id, getParent, getIndex)
                 if(found !== false){
                     if(getParent){
-                        return comments[i]
+                        return getIndex? i : comments[i]
                     } else{
                         return found
                     }
@@ -232,8 +239,26 @@ function removeComment(comments, id){
     return false
 }
 
-function sortCommentsByScore(comments){
-    return comments.sort((a,b)=>b.score-a.score)
+function _rearrangeComments(comments, commentId){
+    const scoredCommentIndex = findComment(comments, commentId, false, true)
+    const commentToRelocate = comments.slice(scoredCommentIndex, scoredCommentIndex+1)[0]
+    comments.splice(scoredCommentIndex,1)
+    _insertCommentInPlace(comments,commentToRelocate)
+}
+
+function _insertCommentInPlace(comments, newComment){
+    let insertPosition = -1;
+    for(let x = 0; x < comments.length; x++){
+        if( newComment.score >= comments[x].score ){
+            insertPosition = x;
+            break;
+        }
+    }
+    if( insertPosition === -1 ){
+        comments.push(newComment)
+    } else{
+        comments.splice(insertPosition,0,newComment)
+    }
 }
 
 export const findCommentParent = (comments,id) =>{
