@@ -1,7 +1,32 @@
 import { createSlice } from '@reduxjs/toolkit';
-import initialData from './data.json'
+import defaultData from './data.json'
 
-let initialState = initialData;
+const localDataKey = "comments-section-state";
+
+let initialState;
+
+function _loadData(){
+    try{
+        let localData = localStorage.getItem(localDataKey)
+        return JSON.parse(localData)
+    } catch(e){
+        return null;
+    }
+}
+
+function _saveState(state){
+    localStorage.setItem(localDataKey, JSON.stringify(state))
+}
+
+function _initData(comments){
+    comments = comments.map((el,i)=>{
+        if( typeof el.replies !== "undefined" && el.replies.length > 0 ){
+            el.replies = _initData(el.replies)
+        }
+        return commentFactory(el)
+    })
+    return comments
+}
 
 export const commentFactory = function (attrs){
     const id = attrs.id
@@ -43,16 +68,12 @@ export const commentFactory = function (attrs){
     return newComment
 }
 
-function _initData(comments){
-    comments = comments.map((el,i)=>{
-        if( typeof el.replies !== "undefined" && el.replies.length > 0 ){
-            el.replies = _initData(el.replies)
-        }
-        return commentFactory(el)
-    })
-    return comments
+initialState = _loadData()
+
+if(initialState === null){
+    initialState = defaultData;
+    initialState.comments = sortCommentsByScore(_initData(initialState.comments))
 }
-initialState.comments = sortCommentsByScore(_initData(initialState.comments))
 
 export const commentsSectionSlice = createSlice({
     name: 'commentsSection',
@@ -66,6 +87,7 @@ export const commentsSectionSlice = createSlice({
                 state.latestComment += 1
                 state.comments.push(action.payload)
                 state.comments = sortCommentsByScore(state.comments)
+                _saveState(state)
             },
             prepare:(commentAttrs) => {
                 return {
@@ -81,7 +103,7 @@ export const commentsSectionSlice = createSlice({
             const newComment = commentFactory(action.payload)
             parentComment.replies.push(newComment)
             state.latestComment += 1
-
+            _saveState(state)
         },
         editModeToggle:  (state, action) => {
             let comment = findComment(state.comments, action.payload)
@@ -97,18 +119,17 @@ export const commentsSectionSlice = createSlice({
         remove:  (state, action) => {
             removeComment(state.comments, action.payload)
             state.showModal = -1
+            _saveState(state)
         },
         rateUp: (state, action) => {
             applyScore(state.comments, action.payload, "+")
             state.comments = sortCommentsByScore(state.comments)
+            _saveState(state)
         },
         rateDown: (state,action) => {
             applyScore(state.comments, action.payload, "-")
             state.comments = sortCommentsByScore(state.comments)
-        },
-        // Use the PayloadAction type to declare the contents of `action.payload`
-        incrementByAmmount: (state, action) => {
-            state.value += action.payload;
+            _saveState(state)
         },
         textareaChanged: (state,action)=>{
             if( action.payload.isReply ){
@@ -226,7 +247,6 @@ export const {
     remove,
     rateUp,
     rateDown,
-    incrementByAmmount,
     textareaChanged, 
     toggleReplySection, 
     setModalStatus, 
