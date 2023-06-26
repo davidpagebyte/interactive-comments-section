@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import initialData from './data.json'
 
-let initialState = initialData;
+let localData = localStorage.getItem("comments-section-state")
+let initialState
 
 export const commentFactory = function (attrs){
     const id = attrs.id
@@ -52,7 +53,13 @@ function _initData(comments){
     })
     return comments
 }
-initialState.comments = sortCommentsByScore(_initData(initialState.comments))
+
+if(localData !== null){
+    initialState = localData
+} else{
+    initialState = initialData;
+    initialState.comments = sortCommentsByScore(_initData(initialState.comments))
+}
 
 export const commentsSectionSlice = createSlice({
     name: 'commentsSection',
