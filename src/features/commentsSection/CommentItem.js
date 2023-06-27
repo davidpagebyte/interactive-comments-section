@@ -20,11 +20,11 @@ export function CommentItem(props){
     }
     let actionButtons;
     if(currentUser.username !== commentData.user.username){
-        actionButtons = <button className="reply" onClick={(e)=>dispatch(toggleReplySection(commentData.id))}>Reply</button>
+        actionButtons = <button className="reply active-opacity" onClick={(e)=>dispatch(toggleReplySection(commentData.id))}>Reply</button>
     } else{
         actionButtons = [
-            <button key={0} className="delete" onClick={(e)=>dispatch(setModalStatus(commentData.id))}>Delete</button>,
-            <button key={1} className="edit" onClick={(e)=>dispatch(editModeToggle(commentData.id))}>Edit</button>
+            <button key={0} className="delete active-opacity" onClick={(e)=>dispatch(setModalStatus(commentData.id))}>Delete</button>,
+            <button key={1} className="edit active-opacity" onClick={(e)=>dispatch(editModeToggle(commentData.id))}>Edit</button>
         ]
     }
     return (

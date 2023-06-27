@@ -75,6 +75,10 @@ table {
     resize: none;
 }
 
+.active-opacity:active{
+    opacity: 0.3;
+}
+
 button, input[type="submit"], input[type="reset"] {
 	background: none;
 	color: inherit;
@@ -136,8 +140,16 @@ button, input[type="submit"], input[type="reset"] {
     background-image: url(./images/icon-plus.svg);
 }
 
+.increase:active{
+    background-image: url(./images/icon-plus-dark.svg);
+}
+
 .decrease{
     background-image: url(./images/icon-minus.svg);
+}
+
+.decrease:active{
+    background-image: url(./images/icon-minus-dark.svg);
 }
 
 .main-section{
