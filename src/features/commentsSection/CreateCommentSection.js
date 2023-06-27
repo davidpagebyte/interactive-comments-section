@@ -31,7 +31,7 @@ export function CreateCommentSection(props){
                 <img alt='avatar' src={avatarPng}></img>
             </div>
             <div className='user-input align'>
-                <textarea ref={textareaRef} className='text raw-comment-text' value={currentText} onChange={(e) => dispatch(textareaChanged({value: e.target.value, isReply: props.isReply,repliedComment: props.id}))}></textarea>
+                <textarea placeholder="Add a comment..." ref={textareaRef} className='text raw-comment-text' value={currentText} onChange={(e) => dispatch(textareaChanged({value: e.target.value, isReply: props.isReply,repliedComment: props.id}))}></textarea>
             </div>
             <div className='submit align' onClick={(e) => dispatch(createAction({
                 id: latestCommentId+1,
@@ -43,7 +43,7 @@ export function CreateCommentSection(props){
                 commentId: props.id,
                 replyingTo: props.replyingTo
             }))}>
-                <button className="primary-button submit-btn">{btnText}</button>
+                <button className="primary-button submit-btn active-opacity">{btnText}</button>
             </div>
             
         </div>
