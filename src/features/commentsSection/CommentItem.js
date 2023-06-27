@@ -20,13 +20,14 @@ export function CommentItem(props){
         parentComment = findCommentParent(comments, commentData.id).id
     }
     let actionButtons;
-    if(currentUser.username !== commentData.user.username){
-        actionButtons = <button className="reply active-opacity" onClick={(e)=>dispatch(toggleReplySection(commentData.id))}>Reply</button>
-    } else{
+    const currentUserIsOwner = currentUser.username === commentData.user.username
+    if(currentUserIsOwner){
         actionButtons = [
             <button key={0} className="delete active-opacity" onClick={(e)=>dispatch(setModalStatus(commentData.id))}>Delete</button>,
             <button key={1} className="edit active-opacity" onClick={(e)=>dispatch(editModeToggle(commentData.id))}>Edit</button>
         ]
+    } else{
+        actionButtons = <button className="reply active-opacity" onClick={(e)=>dispatch(toggleReplySection(commentData.id))}>Reply</button>
     }
     return (
         <li className="comment">
@@ -40,7 +41,7 @@ export function CommentItem(props){
                 </div>
                 <div className="main-section align">
                     <div className="header">
-                        <div className="author center">
+                        <div className={`author center ${currentUserIsOwner? 'badge':''}`}>
                             <div className="avatar-container center">
                                 <img alt="avatar" src={commentData.user.image.png}></img>
                             </div>
