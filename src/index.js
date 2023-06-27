@@ -5,7 +5,10 @@ import { store } from './app/store';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
+import TimeAgo from 'javascript-time-ago'
+import en from 'javascript-time-ago/locale/en.json'
 
+TimeAgo.addDefaultLocale(en)
 const container = document.getElementById('root');
 const root = createRoot(container);
 

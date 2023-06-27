@@ -3,6 +3,7 @@ import './comments-section.css'
 import {getCurrentUser, rateUp, rateDown, findCommentParent, getComments, toggleReplySection, setModalStatus, editModeToggle} from './commentsSectionSlice'
 import { CreateCommentSection } from './CreateCommentSection';
 import { EditArea } from './EditArea';
+import { CreatedAtLabel } from './CreatedAtLabel';
 
 export function CommentItem(props){
     const dispatch = useDispatch()
@@ -45,7 +46,7 @@ export function CommentItem(props){
                             </div>
                             <div className="username center">{commentData.user.username}</div>
                         </div>
-                        <div className="created-at center">{commentData.createdAt}</div>
+                        <CreatedAtLabel date={commentData.createdAt}></CreatedAtLabel>
                     </div>
                     <div className="actions">
                         {actionButtons}
