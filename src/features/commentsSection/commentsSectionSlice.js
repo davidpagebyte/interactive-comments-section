@@ -31,7 +31,7 @@ function _initData(comments){
 export const commentFactory = function (attrs){
     const id = attrs.id
     const content = attrs.content
-    const createdAt = "1 month ago";//new Date().toISOString()
+    const createdAt = (new Date()).toString()
     const score = (typeof attrs.score === 'undefined')? 0:attrs.score
     const username = attrs.user.username
     const replyingTo = (typeof attrs.replyingTo === 'undefined')? null : attrs.replyingTo
