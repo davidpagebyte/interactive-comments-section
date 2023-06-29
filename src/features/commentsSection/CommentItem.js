@@ -32,7 +32,7 @@ export function CommentItem(props){
     return (
         <li className="comment">
             <div className="container">
-                <div className="score align">
+                <div className={`score align ${commentData.score < 0?'wide-ammount':''}`}>
                     <div className="controller">
                         <button className="increase" onClick={(e)=>dispatch(rateUp(commentData.id))}></button>
                         <div className="ammount">{commentData.score}</div>

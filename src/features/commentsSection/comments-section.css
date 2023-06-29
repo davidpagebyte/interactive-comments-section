@@ -483,6 +483,10 @@ button, input[type="submit"], input[type="reset"] {
         margin-left: 16px;
     }
 
+    .score.wide-ammount{
+        width: 106px !important;
+    }
+
     .controller{
         max-width: 100%;
     }
