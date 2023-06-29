@@ -253,7 +253,7 @@ function _rearrangeComments(comments, commentId){
 function _insertCommentInPlace(comments, newComment){
     let insertPosition = -1;
     for(let x = 0; x < comments.length; x++){
-        if( newComment.score >= comments[x].score ){
+        if( newComment.score > comments[x].score ){
             insertPosition = x;
             break;
         }
