@@ -122,14 +122,14 @@ export const commentsSectionSlice = createSlice({
             _saveState(state)
         },
         rateUp: (state, action) => {
-            const isReply = applyScore(state.comments, action.payload, "+")
+            const isReply = applyScore(state.comments, action.payload, "+", state.maxScore)
             if(!isReply){
                 _rearrangeComments(state.comments, action.payload)
             }
             _saveState(state)
         },
         rateDown: (state,action) => {
-            const isReply = applyScore(state.comments, action.payload, "-")
+            const isReply = applyScore(state.comments, action.payload, "-", state.minScore)
             if(!isReply){
                 _rearrangeComments(state.comments, action.payload)
             }
@@ -183,12 +183,16 @@ export const commentsSectionSlice = createSlice({
     },
 });
 
-function applyScore(comments, commentId, operation){
+function applyScore(comments, commentId, operation, boundary){
     let commentToEdit = findComment(comments, commentId)
     if(operation === "+"){
-        commentToEdit.score += 1
+        if( (commentToEdit.score + 1) <= boundary){
+            commentToEdit.score += 1
+        }
     } else{
-        commentToEdit.score -= 1
+        if( (commentToEdit.score - 1) >= boundary){
+            commentToEdit.score -= 1
+        }
     }
     //Inform if scored comment is a reply
     return commentToEdit.replyingTo !== null;
@@ -249,7 +253,7 @@ function _rearrangeComments(comments, commentId){
 function _insertCommentInPlace(comments, newComment){
     let insertPosition = -1;
     for(let x = 0; x < comments.length; x++){
-        if( newComment.score >= comments[x].score ){
+        if( newComment.score > comments[x].score ){
             insertPosition = x;
             break;
         }

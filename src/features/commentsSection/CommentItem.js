@@ -29,10 +29,11 @@ export function CommentItem(props){
     } else{
         actionButtons = <button className="reply active-opacity" onClick={(e)=>dispatch(toggleReplySection(commentData.id))}>Reply</button>
     }
+    let scoreClass = (commentData.score < 0)? "wide-ammount" : (commentData.score > 19)? "medium-ammount" : ""
     return (
         <li className="comment">
             <div className="container">
-                <div className="score align">
+                <div className={`score align ${scoreClass}`}>
                     <div className="controller">
                         <button className="increase" onClick={(e)=>dispatch(rateUp(commentData.id))}></button>
                         <div className="ammount">{commentData.score}</div>
