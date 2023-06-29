@@ -487,6 +487,10 @@ button, input[type="submit"], input[type="reset"] {
         width: 106px !important;
     }
 
+    .score.medium-ammount{
+        width: 101px !important;
+    }
+
     .controller{
         max-width: 100%;
     }
