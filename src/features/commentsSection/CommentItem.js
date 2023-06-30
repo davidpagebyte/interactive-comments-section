@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './comments-section.css'
 import {getCurrentUser, rateUp, rateDown, findCommentParent, getComments, toggleReplySection, setModalStatus, editModeToggle} from './commentsSectionSlice'
@@ -8,6 +9,8 @@ import { CreatedAtLabel } from './CreatedAtLabel';
 export function CommentItem(props){
     const dispatch = useDispatch()
     const commentData = props.data
+    const [isEditing, setIsEditing] = useState(false)
+    console.log(isEditing)
     const currentUser = useSelector(getCurrentUser)
     const replies = commentData.replies.map((el,idx)=>{
         return <CommentItem key={idx} data={el}></CommentItem>
@@ -24,7 +27,7 @@ export function CommentItem(props){
     if(currentUserIsOwner){
         actionButtons = [
             <button key={0} className="delete active-opacity" onClick={(e)=>dispatch(setModalStatus(commentData.id))}>Delete</button>,
-            <button key={1} className="edit active-opacity" onClick={(e)=>dispatch(editModeToggle(commentData.id))}>Edit</button>
+            <button key={1} className="edit active-opacity" onClick={(e)=>{setIsEditing(!isEditing);dispatch(editModeToggle(commentData.id))}}>Edit</button>
         ]
     } else{
         actionButtons = <button className="reply active-opacity" onClick={(e)=>dispatch(toggleReplySection(commentData.id))}>Reply</button>
@@ -54,8 +57,8 @@ export function CommentItem(props){
                         {actionButtons}
                     </div>
                     <div className="message">
-                        <p className={`text${commentData.isEditing? ' hide':''}`}>{replyingTo} {commentData.content}</p>
-                        <EditArea id={commentData.id} replyingTo={commentData.replyingTo} content={commentData.composedContent} isEditing={commentData.isEditing}></EditArea>
+                        <p className={`text${isEditing? ' hide':''}`}>{replyingTo} {commentData.content}</p>
+                        <EditArea id={commentData.id} replyingTo={commentData.replyingTo} content={commentData.composedContent} isEditing={isEditing} setIsEditing={setIsEditing}></EditArea>
                     </div>
                 </div>
             </div>

@@ -59,7 +59,6 @@ export const commentFactory = function (attrs){
         "replyingTo" : null,
         "replyText":replyText,
         "showReplySection": showReplySection,
-        "isEditing": false,
         "composedContent": `${replyingTo === null?'':'@'+replyingTo+' '}${content}`
     }
 
@@ -108,7 +107,6 @@ export const commentsSectionSlice = createSlice({
         },
         editModeToggle:  (state, action) => {
             let comment = findComment(state.comments, action.payload)
-            comment.isEditing = !comment.isEditing
             if(!comment.isEditing){
                 //Hiding edit area without submiting changes. Reseting textarea
                 comment.composedContent = comment.content
@@ -179,7 +177,6 @@ export const commentsSectionSlice = createSlice({
                 comment.content = comment.composedContent
                 comment.composedContent = `@${comment.replyingTo} ${comment.composedContent}`
             }
-            comment.isEditing = false
         },
         changedUser: (state,action)=>{
             state.currentUser = globalSettings.availableUsers[action.payload]

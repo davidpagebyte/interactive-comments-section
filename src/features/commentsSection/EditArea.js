@@ -20,7 +20,7 @@ export function EditArea(props){
             <textarea ref={textareaRef} className="edit-message raw-comment-text" value={props.content} onChange={(e)=>dispatch(ongoingTextEdit({id:props.id,text:e.target.value}))}>
 
             </textarea>
-            <button className="update-submit primary-button submit-btn active-opacity" onClick={(e)=>dispatch(finishEdit(props.id))}>UPDATE</button>
+            <button className="update-submit primary-button submit-btn active-opacity" onClick={(e)=>{props.setIsEditing(false);dispatch(finishEdit(props.id))}}>UPDATE</button>
         </div>
     )
 }
