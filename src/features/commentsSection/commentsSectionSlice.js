@@ -123,14 +123,14 @@ export const commentsSectionSlice = createSlice({
             _saveState(state)
         },
         rateUp: (state, action) => {
-            const isReply = applyScore(state.comments, action.payload, "+", state.maxScore)
+            const isReply = applyScore(state.comments, action.payload, "+", globalSettings.maxScore)
             if(!isReply){
                 _rearrangeComments(state.comments, action.payload)
             }
             _saveState(state)
         },
         rateDown: (state,action) => {
-            const isReply = applyScore(state.comments, action.payload, "-", state.minScore)
+            const isReply = applyScore(state.comments, action.payload, "-", globalSettings.minScore)
             if(!isReply){
                 _rearrangeComments(state.comments, action.payload)
             }
