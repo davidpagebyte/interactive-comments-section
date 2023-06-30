@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import defaultData from './data.json'
+import { globalSettings } from './globals';
 
 const localDataKey = "comments-section-state";
 
@@ -180,6 +181,9 @@ export const commentsSectionSlice = createSlice({
             }
             comment.isEditing = false
         },
+        changedUser: (state,action)=>{
+            state.currentUser = globalSettings.availableUsers[action.payload]
+        },
     },
 });
 
@@ -280,7 +284,8 @@ export const {
     toggleReplySection, 
     setModalStatus, 
     ongoingTextEdit,
-    finishEdit 
+    finishEdit,
+    changedUser 
 } = commentsSectionSlice.actions;
 
 
