@@ -7,6 +7,7 @@ import {
 import {CommentItem} from './CommentItem'
 import { CreateCommentSection } from './CreateCommentSection';
 import { ModalConfirmation } from './ModalConfirmation';
+import { UserSelector } from './UserSelector';
 
 export function CommentsSection(){
     const currentText = useSelector(getCurrentText)
@@ -16,6 +17,7 @@ export function CommentsSection(){
     })
     return (
         <div id="comments-section">
+            <UserSelector></UserSelector>
             <div className="wrapper">
                 <ul className="thread">{topComments}</ul>
                 <CreateCommentSection show={true} isReply={false} btnText="SEND" currentText={currentText}></CreateCommentSection>
