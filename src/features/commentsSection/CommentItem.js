@@ -7,10 +7,10 @@ import { EditArea } from './EditArea';
 import { CreatedAtLabel } from './CreatedAtLabel';
 
 export function CommentItem(props){
+    const [isEditing, setIsEditing] = useState(false)
+    const [showReplySection, setShowReplySection] = useState(false)
     const dispatch = useDispatch()
     const commentData = props.data
-    const [isEditing, setIsEditing] = useState(false)
-    console.log(isEditing)
     const currentUser = useSelector(getCurrentUser)
     const replies = commentData.replies.map((el,idx)=>{
         return <CommentItem key={idx} data={el}></CommentItem>
@@ -30,7 +30,7 @@ export function CommentItem(props){
             <button key={1} className="edit active-opacity" onClick={(e)=>{setIsEditing(!isEditing);dispatch(editModeToggle(commentData.id))}}>Edit</button>
         ]
     } else{
-        actionButtons = <button className="reply active-opacity" onClick={(e)=>dispatch(toggleReplySection(commentData.id))}>Reply</button>
+        actionButtons = <button className="reply active-opacity" onClick={(e)=>{setShowReplySection(!showReplySection);dispatch(toggleReplySection(commentData.id))}}>Reply</button>
     }
     let scoreClass = (commentData.score < 0)? "wide-ammount" : (commentData.score > 19)? "medium-ammount" : ""
     return (
@@ -62,7 +62,7 @@ export function CommentItem(props){
                     </div>
                 </div>
             </div>
-            <CreateCommentSection show={commentData.showReplySection} replyingTo={commentData.user.username} id={commentData.id} parentComment={parentComment} isReply={true} btnText="REPLY" currentText={commentData.replyText}></CreateCommentSection>
+            <CreateCommentSection setShowReplySection={setShowReplySection} show={showReplySection} replyingTo={commentData.user.username} id={commentData.id} parentComment={parentComment} isReply={true} btnText="REPLY" currentText={commentData.replyText}></CreateCommentSection>
             <ul className="replies">
                 {replies}
             </ul>

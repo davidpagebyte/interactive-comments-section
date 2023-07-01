@@ -33,7 +33,11 @@ export function CreateCommentSection(props){
             <div className='user-input align'>
                 <textarea placeholder="Add a comment..." ref={textareaRef} className='text raw-comment-text' value={currentText} onChange={(e) => dispatch(textareaChanged({value: e.target.value, isReply: props.isReply,repliedComment: props.id}))}></textarea>
             </div>
-            <div className='submit align' onClick={(e) => dispatch(createAction({
+            <div className='submit align' onClick={(e) =>{ 
+            if(props.isReply){
+                props.setShowReplySection(false)
+            }
+            dispatch(createAction({
                 id: latestCommentId+1,
                 content: currentText,
                 user: {
@@ -42,7 +46,7 @@ export function CreateCommentSection(props){
                 parentComment: parentComment,
                 commentId: props.id,
                 replyingTo: props.replyingTo
-            }))}>
+            }))}}>
                 <button className="primary-button submit-btn active-opacity">{btnText}</button>
             </div>
             

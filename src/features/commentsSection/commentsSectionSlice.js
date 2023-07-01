@@ -38,8 +38,6 @@ export const commentFactory = function (attrs){
     const replyingTo = (typeof attrs.replyingTo === 'undefined')? null : attrs.replyingTo
     const replies = (typeof attrs.replies === "undefined" )? [] : attrs.replies
     const replyText = (typeof attrs.replyText === "undefined")? "":attrs.replyText
-    const showReplySection = (typeof attrs.showReplySection === "undefined")? false:attrs.showReplySection
-
     const avatarPng = require(`./images/avatars/image-${username}.png`)
     const avatarWebp = require( `./images/avatars/image-${username}.webp`)
 
@@ -58,7 +56,6 @@ export const commentFactory = function (attrs){
         "replies": replies,
         "replyingTo" : null,
         "replyText":replyText,
-        "showReplySection": showReplySection,
         "composedContent": `${replyingTo === null?'':'@'+replyingTo+' '}${content}`
     }
 
@@ -98,7 +95,6 @@ export const commentsSectionSlice = createSlice({
         reply: (state, action) => {
             const parentComment = findComment(state.comments, action.payload.parentComment)
             let commentReplied = findComment(state.comments, action.payload.commentId)
-            commentReplied.showReplySection=false
             commentReplied.replyText = ""
             const newComment = commentFactory(action.payload)
             parentComment.replies.push(newComment)
@@ -144,7 +140,6 @@ export const commentsSectionSlice = createSlice({
         },
         toggleReplySection: (state,action)=>{
             let comment = findComment(state.comments, action.payload)
-            comment.showReplySection = !comment.showReplySection
             comment.replyText = "";
         },
         setModalStatus: (state,action)=>{
