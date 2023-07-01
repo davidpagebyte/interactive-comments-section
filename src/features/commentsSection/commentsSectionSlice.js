@@ -90,8 +90,6 @@ export const commentsSectionSlice = createSlice({
         },
         reply: (state, action) => {
             const parentComment = findComment(state.comments, action.payload.parentComment)
-            // let commentReplied = findComment(state.comments, action.payload.commentId)
-            // commentReplied.replyText = ""
             const newComment = commentFactory(action.payload)
             parentComment.replies.push(newComment)
             state.latestComment += 1
