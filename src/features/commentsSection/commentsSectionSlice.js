@@ -37,7 +37,6 @@ export const commentFactory = function (attrs){
     const username = attrs.user.username
     const replyingTo = (typeof attrs.replyingTo === 'undefined')? null : attrs.replyingTo
     const replies = (typeof attrs.replies === "undefined" )? [] : attrs.replies
-    const replyText = (typeof attrs.replyText === "undefined")? "":attrs.replyText
     const avatarPng = require(`./images/avatars/image-${username}.png`)
     const avatarWebp = require( `./images/avatars/image-${username}.webp`)
 
@@ -55,7 +54,6 @@ export const commentFactory = function (attrs){
         },
         "replies": replies,
         "replyingTo" : null,
-        "replyText":replyText,
         "composedContent": `${replyingTo === null?'':'@'+replyingTo+' '}${content}`
     }
 
@@ -94,8 +92,8 @@ export const commentsSectionSlice = createSlice({
         },
         reply: (state, action) => {
             const parentComment = findComment(state.comments, action.payload.parentComment)
-            let commentReplied = findComment(state.comments, action.payload.commentId)
-            commentReplied.replyText = ""
+            // let commentReplied = findComment(state.comments, action.payload.commentId)
+            // commentReplied.replyText = ""
             const newComment = commentFactory(action.payload)
             parentComment.replies.push(newComment)
             state.latestComment += 1
@@ -131,16 +129,7 @@ export const commentsSectionSlice = createSlice({
             _saveState(state)
         },
         textareaChanged: (state,action)=>{
-            if( action.payload.isReply ){
-                const repliedComment = findComment(state.comments, action.payload.repliedComment )
-                repliedComment.replyText = action.payload.value
-            } else{
-                state.textareaContent = action.payload.value
-            }
-        },
-        toggleReplySection: (state,action)=>{
-            let comment = findComment(state.comments, action.payload)
-            comment.replyText = "";
+            state.textareaContent = action.payload.value
         },
         setModalStatus: (state,action)=>{
             state.showModal = action.payload
@@ -274,7 +263,6 @@ export const {
     rateUp,
     rateDown,
     textareaChanged, 
-    toggleReplySection, 
     setModalStatus, 
     ongoingTextEdit,
     finishEdit,

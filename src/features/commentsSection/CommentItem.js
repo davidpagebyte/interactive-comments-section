@@ -1,16 +1,18 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './comments-section.css'
-import {getCurrentUser, rateUp, rateDown, findCommentParent, getComments, toggleReplySection, setModalStatus, editModeToggle} from './commentsSectionSlice'
+import {getCurrentUser, rateUp, rateDown, findCommentParent, getComments, setModalStatus, editModeToggle} from './commentsSectionSlice'
 import { CreateCommentSection } from './CreateCommentSection';
 import { EditArea } from './EditArea';
 import { CreatedAtLabel } from './CreatedAtLabel';
 
 export function CommentItem(props){
+    const commentData = props.data
     const [isEditing, setIsEditing] = useState(false)
     const [showReplySection, setShowReplySection] = useState(false)
-    const dispatch = useDispatch()
-    const commentData = props.data
+    const [replyText, setReplyText] = useState("")
+
+    const dispatch = useDispatch()    
     const currentUser = useSelector(getCurrentUser)
     const replies = commentData.replies.map((el,idx)=>{
         return <CommentItem key={idx} data={el}></CommentItem>
@@ -30,7 +32,14 @@ export function CommentItem(props){
             <button key={1} className="edit active-opacity" onClick={(e)=>{setIsEditing(!isEditing);dispatch(editModeToggle(commentData.id))}}>Edit</button>
         ]
     } else{
-        actionButtons = <button className="reply active-opacity" onClick={(e)=>{setShowReplySection(!showReplySection);dispatch(toggleReplySection(commentData.id))}}>Reply</button>
+        actionButtons = <button className="reply active-opacity" onClick={(e)=>{
+            setShowReplySection(!showReplySection);
+            if(!showReplySection){
+                setReplyText("")
+            }
+        }}>
+        
+        Reply</button>
     }
     let scoreClass = (commentData.score < 0)? "wide-ammount" : (commentData.score > 19)? "medium-ammount" : ""
     return (
@@ -62,7 +71,7 @@ export function CommentItem(props){
                     </div>
                 </div>
             </div>
-            <CreateCommentSection setShowReplySection={setShowReplySection} show={showReplySection} replyingTo={commentData.user.username} id={commentData.id} parentComment={parentComment} isReply={true} btnText="REPLY" currentText={commentData.replyText}></CreateCommentSection>
+            <CreateCommentSection setReplyText={setReplyText} setShowReplySection={setShowReplySection} show={showReplySection} replyingTo={commentData.user.username} id={commentData.id} parentComment={parentComment} isReply={true} btnText="REPLY" currentText={replyText}></CreateCommentSection>
             <ul className="replies">
                 {replies}
             </ul>

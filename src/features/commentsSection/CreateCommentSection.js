@@ -31,11 +31,23 @@ export function CreateCommentSection(props){
                 <img alt='avatar' src={avatarPng}></img>
             </div>
             <div className='user-input align'>
-                <textarea placeholder="Add a comment..." ref={textareaRef} className='text raw-comment-text' value={currentText} onChange={(e) => dispatch(textareaChanged({value: e.target.value, isReply: props.isReply,repliedComment: props.id}))}></textarea>
+                <textarea placeholder="Add a comment..." ref={textareaRef} className='text raw-comment-text' value={currentText} onChange={(e) => { 
+                    if(props.isReply){
+                        props.setReplyText(e.target.value)
+                    } else{
+                        dispatch(
+                            textareaChanged({
+                                value: e.target.value
+                            })
+                        )
+                    }
+                }}>
+                </textarea>
             </div>
             <div className='submit align' onClick={(e) =>{ 
             if(props.isReply){
                 props.setShowReplySection(false)
+                props.setReplyText("")
             }
             dispatch(createAction({
                 id: latestCommentId+1,
