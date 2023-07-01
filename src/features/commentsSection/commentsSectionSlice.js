@@ -172,6 +172,7 @@ export const commentsSectionSlice = createSlice({
                 comment.content = comment.composedContent
                 comment.composedContent = `@${comment.replyingTo} ${comment.composedContent}`
             }
+            _saveState(state)
         },
         changedUser: (state,action)=>{
             state.currentUser = globalSettings.availableUsers[action.payload]
