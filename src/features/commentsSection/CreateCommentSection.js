@@ -31,18 +31,37 @@ export function CreateCommentSection(props){
                 <img alt='avatar' src={avatarPng}></img>
             </div>
             <div className='user-input align'>
-                <textarea placeholder="Add a comment..." ref={textareaRef} className='text raw-comment-text' value={currentText} onChange={(e) => dispatch(textareaChanged({value: e.target.value, isReply: props.isReply,repliedComment: props.id}))}></textarea>
+                <textarea placeholder="Add a comment..." ref={textareaRef} className='text raw-comment-text' value={currentText} onChange={(e) => { 
+                    if(props.isReply){
+                        props.setReplyText(e.target.value)
+                    } else{
+                        dispatch(
+                            textareaChanged({
+                                value: e.target.value
+                            })
+                        )
+                    }
+                }}>
+                </textarea>
             </div>
-            <div className='submit align' onClick={(e) => dispatch(createAction({
-                id: latestCommentId+1,
-                content: currentText,
-                user: {
-                    username: currentUser.username
-                },
-                parentComment: parentComment,
-                commentId: props.id,
-                replyingTo: props.replyingTo
-            }))}>
+            <div className='submit align' onClick={(e) =>{ 
+                if( currentText !== "" ){
+                    if(props.isReply){
+                        props.setShowReplySection(false)
+                        props.setReplyText("")
+                    }
+                    dispatch(createAction({
+                        id: latestCommentId+1,
+                        content: currentText,
+                        user: {
+                            username: currentUser.username
+                        },
+                        parentComment: parentComment,
+                        commentId: props.id,
+                        replyingTo: props.replyingTo
+                    }))
+                }
+            }}>
                 <button className="primary-button submit-btn active-opacity">{btnText}</button>
             </div>
             

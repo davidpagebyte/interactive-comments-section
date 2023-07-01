@@ -26,5 +26,7 @@ const availableUsers = [
 ]
 
 export const globalSettings = {
-    availableUsers: availableUsers
+    availableUsers: availableUsers,
+    "maxScore": 99,
+    "minScore": -99
 }
