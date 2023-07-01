@@ -38,7 +38,6 @@ export const commentFactory = function (attrs){
     const replyingTo = (typeof attrs.replyingTo === 'undefined')? null : attrs.replyingTo
     const replies = (typeof attrs.replies === "undefined" )? [] : attrs.replies
     const avatarPng = require(`./images/avatars/image-${username}.png`)
-    const avatarWebp = require( `./images/avatars/image-${username}.webp`)
 
     let newComment = {
         "id": id,
@@ -48,7 +47,6 @@ export const commentFactory = function (attrs){
         "user": {
             "image": {
                 "png": avatarPng,
-                "webp": avatarWebp
             },
             "username": username
         },
